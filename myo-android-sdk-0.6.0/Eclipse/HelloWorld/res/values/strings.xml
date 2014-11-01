@@ -12,5 +12,9 @@
     <string name="pose_rest">Rest</string>
     <string name="arm_left">Left Arm</string>
     <string name="arm_right">Right Arm</string>
-
+    
+    <string	name="click">Click</string>
+    <string name="logo">Logo</string>
+    <color name="yellow">#f1c40f</color>
+    <color name="white">#ecf0f1</color>
 </resources>

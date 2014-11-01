@@ -30,6 +30,7 @@ import com.thalmic.myo.Hub;
 import com.thalmic.myo.Myo;
 import com.thalmic.myo.Pose;
 import com.thalmic.myo.Quaternion;
+import com.thalmic.myo.Vector3;
 import com.thalmic.myo.XDirection;
 import com.thalmic.myo.scanner.ScanActivity;
 
@@ -73,58 +74,38 @@ public class HelloWorldActivity extends Activity {
         private XDirection mXDirection = XDirection.UNKNOWN;
         private String signalState = "rest";
 
-        // onConnect() is called whenever a Myo has been connected.
         @Override
         public void onConnect(Myo myo, long timestamp) {
-            // Set the text color of the text view to cyan when a Myo connects.
             mTextView.setTextColor(Color.CYAN);
         }
 
-        // onDisconnect() is called whenever a Myo has been disconnected.
         @Override
         public void onDisconnect(Myo myo, long timestamp) {
-            // Set the text color of the text view to red when a Myo disconnects.
             mTextView.setTextColor(Color.RED);
         }
 
-        // onArmRecognized() is called whenever Myo has recognized a setup gesture after someone has put it on their
-        // arm. This lets Myo know which arm it's on and which way it's facing.
         @Override
         public void onArmRecognized(Myo myo, long timestamp, Arm arm, XDirection xDirection) {
             mArm = arm;
             mXDirection = xDirection;
         }
 
-        // onArmLost() is called whenever Myo has detected that it was moved from a stable position on a person's arm after
-        // it recognized the arm. Typically this happens when someone takes Myo off of their arm, but it can also happen
-        // when Myo is moved around on the arm.
         @Override
         public void onArmLost(Myo myo, long timestamp) {
             mArm = Arm.UNKNOWN;
             mXDirection = XDirection.UNKNOWN;
         }
 
-        // onOrientationData() is called whenever a Myo provides its current orientation,
-        // represented as a quaternion.
         @Override
         public void onOrientationData(Myo myo, long timestamp, Quaternion rotation) {
-            // Calculate Euler angles (roll, pitch, and yaw) from the quaternion.
             float roll = (float) Math.toDegrees(Quaternion.roll(rotation));
             float pitch = (float) Math.toDegrees(Quaternion.pitch(rotation));
             float yaw = (float) Math.toDegrees(Quaternion.yaw(rotation));
             
-            // Adjust roll and pitch for the orientation of the Myo on the arm.
             if (mXDirection == XDirection.TOWARD_ELBOW) {
                 roll *= -1;
                 // pitch *= -1;
             }
-
-            // Next, we apply a rotation to the text view using the roll, pitch, and yaw.
-//            mTextView.setRotation(roll);
-//            mTextView.setRotationX(pitch);
-//            mTextView.setRotationY(yaw);
-            
-//            Log.w("myo", String.valueOf(pitch));
             
             if (pitch > 35) {
             	mTextView.setText("->");
@@ -150,12 +131,20 @@ public class HelloWorldActivity extends Activity {
             }
             
         }
+        
+        @Override
+        public void onAccelerometerData(Myo myo, long timestamp, Vector3 accel) {
+        	
+        	if (accel.length() > 5) {
+        		Log.w("fall", "falling?");
+        		Log.w("fall", String.valueOf(accel.length()));
+        		signal("fall");
+        	}
+        	
+        }
 
-        // onPose() is called whenever a Myo provides a new pose.
         @Override
         public void onPose(Myo myo, long timestamp, Pose pose) {
-            // Handle the cases of the Pose enumeration, and change the text of the text view
-            // based on the pose we receive.
             switch (pose) {
                 case UNKNOWN:
                     mTextView.setText(getString(R.string.hello_world));

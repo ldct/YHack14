@@ -218,6 +218,8 @@ public class HelloWorldActivity extends Activity {
 
         // Next, register for DeviceListener callbacks.
         hub.addListener(mListener);
+
+        this.onScanActionSelected();
         
         WebView webview = (WebView) findViewById(R.id.webview);
         webview.getSettings().setJavaScriptEnabled(true);
@@ -286,8 +288,13 @@ public class HelloWorldActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+    
+    public void onButtonClick(View v) {
+    	Log.w("button", "button clicked");
+    	onScanActionSelected();
+    }
 
-    private void onScanActionSelected() {
+    public void onScanActionSelected() {
         // Launch the ScanActivity to scan for Myos to connect to.
         Intent intent = new Intent(this, ScanActivity.class);
         startActivity(intent);

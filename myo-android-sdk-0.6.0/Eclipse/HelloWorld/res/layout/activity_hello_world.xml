@@ -12,7 +12,7 @@
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        android:animateLayoutChanges="false"
-       android:background="@color/yellow"
+       android:background="@color/green"
        android:gravity="center_horizontal"
        android:orientation="vertical" >
 
@@ -21,7 +21,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:onClick="onButtonClick"
-			android:text="Pair Myo" />
+			android:text="@string/pairButtonString" />
 
     	<TextView
         	android:id="@+id/text"
@@ -37,7 +37,8 @@
         	android:id="@+id/imageView1"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
-        	android:src="@drawable/biking" />
+        	android:src="@drawable/biking"
+        	android:contentDescription="@string/imgDescription" />
 
      	 <WebView
          	 android:id="@+id/webview"

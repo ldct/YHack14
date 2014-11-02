@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context="com.thalmic.android.sample.helloworld.HelloWorldActivity"
     tools:ignore="MergeRootFrame" 
-    android:background="@color/yellow"
+    android:background="@color/black"
     >
 
 	<LinearLayout
@@ -30,7 +30,7 @@
         	android:layout_gravity="center"
         	android:text="@string/hello_world"
         	android:textSize="50dp"
-        	android:textColor="@color/white"
+        	android:textColor="@color/black"
         	tools:ignore="SpUsage" />
 
     	<ImageView

@@ -15,9 +15,8 @@
     
     <string	name="click">Click</string>
     <string name="logo">Logo</string>
-    <color name="yellow">#f1c40f</color>
-    <color name="white">#ecf0f1</color>
-    <color name="green">#10F010</color>
+    <color name="black">#000</color>
+    <color name="green">#20B020</color>
     <string name="imgDescription">Cycling logo</string>
     <string name="pairButtonString">Pair Myo</string>
 </resources>

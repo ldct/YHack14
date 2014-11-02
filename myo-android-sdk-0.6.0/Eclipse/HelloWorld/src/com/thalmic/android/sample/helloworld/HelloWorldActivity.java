@@ -49,7 +49,7 @@ public class HelloWorldActivity extends Activity {
     RequestQueue queue;
     
     private void signal(String message) {
-    	String url ="http://172.26.10.254:8080/" + message;
+    	String url ="http://192.168.42.1:8080/" + message;
     	
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
         		new Response.Listener<String>() {

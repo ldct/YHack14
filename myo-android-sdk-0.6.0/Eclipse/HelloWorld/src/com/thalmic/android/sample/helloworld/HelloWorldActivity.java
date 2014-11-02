@@ -12,6 +12,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.*;
+import android.webkit.WebSettings;
+import android.webkit.WebSettings.PluginState;
+import android.webkit.WebSettings.RenderPriority;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +42,8 @@ public class HelloWorldActivity extends Activity {
 
     // This code will be returned in onActivityResult() when the enable Bluetooth activity exits.
     private static final int REQUEST_ENABLE_BT = 1;
+    private static final String embedCode = "<iframe width=\"500\" height=\"300\" scrolling=\"no\" frameborder=\"n\" src=\"https://www.google.com/fusiontables/embedviz?q=select+col4%2C+col5%2C+col10+from+1mm6FzUTIkRC8W_TbNzI0ff9_jFK5N7DOPADlhHUj+where+col2+%3D+&#39;MANHATTAN&#39;+limit+1000&amp;viz=HEATMAP&amp;h=true&amp;lat=40.72191792035109&amp;lng=-73.99185474433587&amp;t=1&amp;z=14&amp;l=col4&amp;y=3&amp;tmplt=3&amp;hmd=true&amp;hmg=%2366ff0000%2C%2393ff00ff%2C%23c1ff00ff%2C%23eeff00ff%2C%23f4e300ff%2C%23f4e300ff%2C%23f9c600ff%2C%23ffaa00ff%2C%23ff7100ff%2C%23ff3900ff%2C%23ff0000ff&amp;hmo=0.6&amp;hmr=15&amp;hmw=10&amp;hml=TWO_COL_LAT_LNG\"></iframe>";
+    private static final String embedUrl = "https://www.google.com/fusiontables/embedviz?q=select+col4%2C+col5%2C+col10+from+1mm6FzUTIkRC8W_TbNzI0ff9_jFK5N7DOPADlhHUj+where+col2+%3D+'MANHATTAN'+limit+1000&viz=HEATMAP&h=true&lat=40.72191792035109&lng=-73.99185474433587&t=1&z=14&l=col4&y=3&tmplt=3&hmd=true&hmg=%2366ff0000%2C%2393ff00ff%2C%23c1ff00ff%2C%23eeff00ff%2C%23f4e300ff%2C%23f4e300ff%2C%23f9c600ff%2C%23ffaa00ff%2C%23ff7100ff%2C%23ff3900ff%2C%23ff0000ff&hmo=0.6&hmr=15&hmw=10&hml=TWO_COL_LAT_LNG";
 
     private TextView mTextView;
 
@@ -211,6 +218,22 @@ public class HelloWorldActivity extends Activity {
 
         // Next, register for DeviceListener callbacks.
         hub.addListener(mListener);
+        
+        WebView webview = (WebView) findViewById(R.id.webview);
+        webview.getSettings().setJavaScriptEnabled(true);
+        webview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+        webview.getSettings().setLoadsImagesAutomatically(true);
+        webview.getSettings().setDomStorageEnabled(true);
+        webview.getSettings().setDatabaseEnabled(true);
+        webview.getSettings().setAppCacheEnabled(true);
+        webview.setWebViewClient(new WebViewClient());
+        webview.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+        
+        String html = "<html><body>" + embedCode + "</body></html>";
+        String mime = "text/html";
+        String encoding = "utf-8";
+        //webview.loadData("<html><body><iframe width=\"500\" height=\"300\" scrolling=\"no\" frameborder=\"n\" src=\"https://www.google.com/\"</iframe></body></html>", mime, encoding);
+        webview.loadUrl(embedUrl);
     }
 
     @Override

@@ -5,4 +5,4 @@ Bicycle turn signals, displayed on the back of the helmet, controlled by arm ges
 This is done using the Myo's gestures and accelerometer, texting through twilio, using the edison as a hotspot for the phone to connect to, and displaying everything on an android app using fusion tables.
 
 Read more at:
-http://challengepost.com/software/headlightsg
+http://challengepost.com/software/headlights

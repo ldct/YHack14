@@ -1,4 +1,5 @@
-# YHack14
+#Headlights
+###Made for YHack 2014
 
 Bicycle turn signals, displayed on the back of the helmet, controlled by arm gestures and thalmic Myo. Logs accidents in database, displays heat map of most frequent accident locations, and contacts police or set contact if user cannot get up.
 
